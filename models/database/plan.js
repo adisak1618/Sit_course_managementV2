@@ -7,7 +7,6 @@ var coursePlanSchema = mongoose.Schema({
 		message: Object,
 		status: String,
 		department:String,
-
 	});
 
 

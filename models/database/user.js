@@ -7,6 +7,6 @@ var userSchema = mongoose.Schema({
 		salt: String,
 		hashed_pwd: String,
 		roles: [String],
-	});
+});
 
 module.exports = userSchema;
