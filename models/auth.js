@@ -1,6 +1,5 @@
 var passport = require('passport'),
 LocalStrategy = require('passport-local').Strategy;
-var crypto = require('crypto');
 var mongoose = require('mongoose');
 var datauser = mongoose.model('user');
 var flash = require('connect-flash');
@@ -34,23 +33,14 @@ passport.deserializeUser(function(user, done){
 
 module.exports = passport;
 
-function createSalt() {
-  return crypto.randomBytes(128).toString('base64');
-}
-
-function hashPwd(salt, pwd) {
-  var hmac = crypto.createHmac('sha1', salt);
-  return hmac.update(pwd).digest('hex');
-}
-
 function checkPWD(data, pwd){
 	if(!data){
 		return false;
 	}
 	var salt = data.salt;
 	// var password = hashPwd(salt, pwd);
-	var password = data.hashed_pwd;
-	if (!(password === data.hashed_pwd)) {
+	var password = data.password;
+	if (!(password === data.password)) {
 		return false;
 	}
 	return data;
