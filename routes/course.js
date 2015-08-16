@@ -16,7 +16,7 @@ router.get('/create', function(req, res) {
   res.render('course/create');
 });
 
-router.post('/create', function(req, res, next) {
+router.post('/create', function(req, res) {
   dataCourse.create({
     course_name: req.body.course_name,
     course_id: req.body.course_id,
