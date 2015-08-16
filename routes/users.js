@@ -20,18 +20,22 @@ router.post('/signup', function(req, res) {
   month = today.getMonth()+1;
   year = today.getFullYear();
   today = month+'/'+date+'/'+year;
-  dataUser.create({
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-    department: req.body.department,
-    student_email: req.body.email,
-    username: req.body.username,
-    salt: salt,
-    password: hashPwd(salt, req.body.password),
-    roles: [],
-    entranced_year: req.body.entranced_year,
-    last_update: today
-  });
+  if (req.body.password == req.body.confirm-password) {
+    dataUser.create({
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      department: req.body.department,
+      student_email: req.body.email,
+      username: req.body.username,
+      salt: salt,
+      password: hashPwd(salt, req.body.password),
+      roles: [],
+      entranced_year: req.body.entranced_year,
+      last_update: today
+    });
+  } else {
+    res.redirect('/users/signup');
+  }
   res.redirect('/users');
 });
 
