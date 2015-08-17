@@ -9,16 +9,14 @@ router.get('/', middleware, function(req, res, next) {
 	res.redirect('/');
 });
 
-router.get('/:id', function(req, res, next){
-	dataplan.findOne({_id:req.params.id},function(err,collection){
-		//res.render('plan-list',{user:req.user,datas:collection});
+router.get('/:id', middleware, function(req, res) {
+	dataplan.findById(req.params.id, function(err,collection) {
 		res.sendfile(path.resolve('public/app.html'));
 	});
 });
 
-router.get('/api/:id', middleware, function(req, res, next){
-	dataplan.findOne({_id:req.params.id},function(err,collection){
-		//res.render('plan-list',{user:req.user,datas:collection});
+router.get('/api/:id', middleware, function(req, res, next) {
+	dataplan.findById(req.params.id, function(err,collection) {
 		res.json(collection);
 	});
 });

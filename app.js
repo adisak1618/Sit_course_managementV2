@@ -18,6 +18,7 @@ var methodOverride = require('method-override');
 
 var app = express();
 
+app.set('domain', '55.55.55.55');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -69,7 +70,7 @@ app.use(function(err, req, res, next) {
 });
 
 
-app.listen(3000,function(){
+app.listen(3000, function() {
   console.log('Node runing on port 3000');
 });
 
