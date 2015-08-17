@@ -9,9 +9,12 @@ var dataplan = mongoose.model('plan');
 /* GET home page. */
 router.get('/', middleware, function(req, res, next) {
 	console.log(req.user);
-  	dataplan.find({}, function(err, collection){
-  		res.render('plan-list', {user:req.user, datas:collection});
-  	});
+	if (req.user.roles[0] == 'admin') {
+		res.redirect('/course');
+	}
+	dataplan.find({}, function(err, collection){
+		res.render('plan-list', {user:req.user, datas:collection});
+	});
 });
 
 router.get('/logout',function(req,res){
@@ -19,21 +22,18 @@ router.get('/logout',function(req,res){
 	res.redirect('/');
 });
 
-router.get('/login',function(req,res,next){
+router.get('/login',function(req, res){
 	if(req.user){
 		res.redirect('/');
 	}
 	res.render('login');
 });
 
-router.post('/login', passport.authenticate('local',{
-	failureRedirect:'/login',
-	successRedirect:'/',
-	failureFlash : true
-}));
-
-router.get('/signup', function(req, res) {
-	res.render('account/signup');
-});
+router.post('/login', passport.authenticate('local', {
+	successRedirect: '/',
+	failureRedirect: '/login',
+	failureFlash: true,
+}
+));
 
 module.exports = router;

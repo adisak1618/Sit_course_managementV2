@@ -20,7 +20,7 @@ router.post('/signup', function(req, res) {
   month = today.getMonth()+1;
   year = today.getFullYear();
   today = month+'/'+date+'/'+year;
-  if (req.body.password == req.body.confirm-password) {
+  if (req.body.password == req.body.confirm_password) {
     dataUser.create({
       firstname: req.body.firstname,
       lastname: req.body.lastname,

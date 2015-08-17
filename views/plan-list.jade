@@ -6,6 +6,6 @@ block content
 			b  #{user.username} plan
 		ul
 			each data in datas
-				a(href="plan/"+data._id)
-					li
-						div=data.plan_name
+				li
+					a(href="plan/"+data._id) #{data.plan_name} 
+					span - #{data.status}
